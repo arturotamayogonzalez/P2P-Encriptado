@@ -1,0 +1,45 @@
+Para poder usar el sistema inicialmente se debe levantar el servidor con los siguientes pasos:
+1. Abrir terminal y ubicarlo en la carpeta donde se encuentra el archivo servidor.c
+2. Ejecutar gcc servidor.c -o servidor
+3. Ejecutar ./servidor [ip] [puerto]
+[ip]: (opcional) dirección IP en la que desea ejecutar su servidor, por ejemplo. 10.1.227.154.
+Este parámetro es opcional si no se menciona el servidor lo hará en 12.0.0.1.
+[puerto]: (opcional) Puerto en el que desea ejecutar su servidor, si no se menciona, tomará cualquier puerto disponible al azar.
+
+	Cada servidor creará automáticamente el nombre de la carpeta “p2p-servidor”.
+	Para hacer uso de las acciones del servidor bastara con ingresar en el menú la opción que deseas, el servidor actuara de manera automática a cada acción.
+	Las tareas que puede realizar el servidor son: 
+1) Ver peers conectados : Ver todos los peers conectados al servidor con su respectiva información.
+2) Ver archivos publicados: Ver la lista de todos los activos publicados hasta la actualidad con su respectiva información de que peer fue quien que lo publicó.
+3) Información del servidor : Obtener información com el ip y el puerto del servidor
+0) Salir: Desconectar el servidor
+
+	Después de levantar el servidor la base de datos de los archivos estará vacía eso significa que no se podrá obtener ningún archivo hasta que sea publicado por ende lo primero a hacer en un peer es publicar algún archivo para poder ser descargado.
+	Se puede crear otra carpeta en el mismo ordenador en otra ubicación o en otra maquina, la única condición es que la carpeta contenga el archivo peer.c. Si se desea ejecutar múltiples peers en la misma maquina bastara con hacer una carpeta por cada peer que se quiera lanzar. Los pasos para ejecutar un peer son:
+
+1. Abrir terminal y ubicarlo en la carpeta donde se encuentra el archivo peer.c
+2. gcc peer.c -o peer
+3. ./peer [IPServidor] [PuertoServidor] [KU1] [KU2] [KR1] [KR2] [IP propia] 
+[IPServidor]: (requerido) Dirección IP del servidor central.
+[PuertoServidor]: (requerido) Puerto del servidor central.
+[KU1]: (requerido) primer elemento de la llave publica KU[?,  ].
+[KU2]: (requerido) segundo elemento de la llave publica KU[  ,?].
+[KR1]: (requerido) primer elemento de la llave privada KR[?,  ].
+[KR2]: (requerido) segundo elemento de la llave privada KR[  ,?].
+[ip]: (opcional) dirección IP en la que desea ejecutar su peer, por ejemplo. 10.1.227.154.
+Este parámetro es opcional si no se menciona que el servidor lo hará en 12.0.0.1.
+
+	Cada peer creará automáticamente el nombre de la carpeta “p2p-archivos".
+	Las tareas que puede realizar un peer son:
+
+1) Publicar: Donde un peer puede publicar un archivo para que otro pueda descargarlo.
+2) Obtener archivo o descargar archivo: El peer puede obtener un archivo de otro peer.
+3) Desencriptar archivo: El peer puede desencriptar un archivo descargado de otro peer
+3) Mi información: Obtener información como ip, puerto y el id del peer que se le fue asignado.
+0) Salir
+
+	Para poder publicar un archivo debe estar en la carpeta p2p-archivos, el programa pedirá el nombre junto con la extension del archivo por ejemplo “prueba.txt”. Hay que cerciorarse de que la cadena ingresada sea exactamente al nombre del archivo. El programa ah sido probado con archivos .txt.
+
+	Para descargar un archivo bastara con indicar el nombre del archivo a recuperar, en este caso debe se haber sido publicado por otro peer, bastara con ingresar el nombre del archivo junto con su extension por ejemplo “prueba.txt”, posteriormente el programa le pedirá de una lista de archivos publicados seleccionar alguna de las opciones para comenzar la descarga, comenzara un proceso de descarga y al finalizar el archivo estará dentro de la carpeta de archivos del peer.
+
+	Para desencriptar un archivo bastará con indicar la ubicación o nombre del archivo a desencripar y el nombre del archivo donde quieras que se desencripte.
